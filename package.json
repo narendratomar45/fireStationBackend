@@ -1,0 +1,44 @@
+{
+  "name": "backendfirestations",
+  "version": "1.0.0",
+  "description": "fire stations web application",
+  "main": "index.js",
+  "type": "module",
+  "imports": {
+  "#routes/*": "./src/routes/*",
+  "#middleware/*": "./src/middleware/*",
+  "#controllers/*": "./src/controllers/*",
+  "#models/*": "./src/models/*",
+  "#config/*": "./src/config/*",
+  "#utils/*": "./src/utils/*"
+}
+,
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [
+    "javascript",
+    "mongodb",
+    "nodejs"
+  ],
+  "author": "Nitish Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.13.2",
+    "mongoose-aggregate-paginate-v2": "^1.1.4",
+    "multer": "^1.4.5-lts.2",
+    "nodemailer": "^6.10.1",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3",
+    "sharp": "^0.34.1"
+  }
+}
