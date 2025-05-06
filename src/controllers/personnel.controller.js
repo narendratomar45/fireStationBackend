@@ -5,10 +5,10 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose from "mongoose";
 
 const createPersonnel = asyncHandler(async (req, res) => {
-  const { name, position, badge, status, team, email, Phone } = req.body;
+  const { name, position, badge, status, team, email, phone } = req.body;
   console.log(req.body);
 
-  if (!name || !position || !badge || !status || !team || !email || !Phone) {
+  if (!name || !position || !badge || !status || !team || !email || !phone) {
     throw new ApiError(400, "All fields are required");
   }
   const existsingPersonnel = await Personnel.find({ email });
@@ -22,7 +22,7 @@ const createPersonnel = asyncHandler(async (req, res) => {
     status,
     team,
     email,
-    Phone,
+    phone,
   });
 
   res

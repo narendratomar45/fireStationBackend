@@ -5,6 +5,7 @@ import { ApiError } from "#utils/ApiError.js";
 import { ApiResponse } from "#utils/ApiResponse.js";
 import { asyncHandler } from "#utils/asyncHandler.js";
 import nodemailer from "nodemailer";
+import path from "path";
 
 const generateAccessTokens = async (userId) => {
   try {
@@ -69,16 +70,19 @@ const createUser = asyncHandler(async (req, res) => {
   if (existingUser) {
     throw new ApiError(401, "User already exists");
   }
+  console.log("Files received:", req.files);
 
-  const avatarLocalPath = req.files?.avatar?.[0]?.path;
+  const avatarLocalPath = path.resolve(req.files?.avatar?.[0]?.path);
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is required");
   }
+  console.log("AVATARLOCAL", avatarLocalPath);
 
   const avatarURL = await uploadOnCloudinary(avatarLocalPath);
-  if (!avatarURL || !avatarURL.secure_url) {
+  if (!avatarURL || !avatarURL.url) {
     throw new ApiError(400, "Failed to upload avatar file");
   }
+  console.log("AVTARURL", avatarURL);
 
   const newUser = await User.create({
     fullName,
@@ -89,7 +93,7 @@ const createUser = asyncHandler(async (req, res) => {
     role,
     district,
     password,
-    avatar: avatarURL.secure_url,
+    avatar: avatarURL.url,
     pisNo,
   });
   const createdUser = await User.findById(newUser._id).select(
